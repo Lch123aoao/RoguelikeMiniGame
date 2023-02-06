@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,23 +6,23 @@ using UnityEngine.EventSystems;
 
 public enum EJoystickType
 {
-    Fixed,      //¹Ì¶¨Ê½Ò¡¸Ë
-    Floating,   //¸¡¶¯Ê½Ò¡¸Ë(¸ù¾İµã»÷ÆÁÄ»µÄÎ»ÖÃÉú³ÉÒ¡¸Ë¿ØÖÆÆ÷)
-    Dynamic     //¶¯Ì¬Ò¡¸Ë(Ò¡¸Ë¿ÉÒÔ±»¶¯Ì¬ÍÏ×§)
+    Fixed,      //å›ºå®šå¼æ‘‡æ†
+    Floating,   //æµ®åŠ¨å¼æ‘‡æ†(æ ¹æ®ç‚¹å‡»å±å¹•çš„ä½ç½®ç”Ÿæˆæ‘‡æ†æ§åˆ¶å™¨)
+    Dynamic     //åŠ¨æ€æ‘‡æ†(æ‘‡æ†å¯ä»¥è¢«åŠ¨æ€æ‹–æ‹½)
 }
 
 public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    [Header("Ò¡¸ËÀàĞÍ")]
+    [Header("æ‘‡æ†ç±»å‹")]
     public EJoystickType EJoystickType = EJoystickType.Fixed;
 
-    [Header("Ò¡¸Ë±³¾°")]
+    [Header("æ‘‡æ†èƒŒæ™¯")]
     public RectTransform BgRect;
 
-    [Header("Ò¡¸ËÍÏ¶¯°´Å¥")]
+    [Header("æ‘‡æ†æ‹–åŠ¨æŒ‰é’®")]
     public RectTransform HandleRect;
 
-    [Header("µã»÷»½ĞÑÒ¡¸ËÇøÓò")]
+    [Header("ç‚¹å‡»å”¤é†’æ‘‡æ†åŒºåŸŸ")]
     public RectTransform DragArea;
 
     public float MoveThreshold = 8f;
@@ -37,11 +37,11 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     public Action JoystickOnTouchStart;
     public Action<Vector2, Vector2> JoystickOnMove;
     public Action<Vector2> JoystickOnTouchUp;
-    // Ò¡¸Ë´¥·¢×´Ì¬
+    // æ‘‡æ†è§¦å‘çŠ¶æ€
     private bool IsJoystickShow = false;
-    // µã»÷´ÎÊı¼ÇÂ¼
+    // ç‚¹å‡»æ¬¡æ•°è®°å½•
     private int IsTouchJoystickCount = 0;
-    // ÍÏ¶¯×´Ì¬
+    // æ‹–åŠ¨çŠ¶æ€
     private bool IsDrag = false;
 
     private bool mIsOpenDragSkill = false;
@@ -79,7 +79,7 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     {
         mBaseRect = vBaseRect;
         mCanvas = vCanvas;
-        InitUI();
+        InitUI(); 
     }
 
 
@@ -98,7 +98,7 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        // °´ÏÂ¼ÆÊı
+        // æŒ‰ä¸‹è®¡æ•°
         IsTouchJoystickCount++;
         JoystickOnTouchStart?.Invoke();
     }
@@ -117,11 +117,11 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
             }
         }
 
-        Vector2 position = Camera.main.WorldToScreenPoint(BgRect.position);//½«ui×ø±êÖĞµÄbackgroundÓ³Éäµ½ÆÁÄ»ÖĞµÄÊµ¼Ê×ø±ê
+        Vector2 position = Camera.main.WorldToScreenPoint(BgRect.position);//å°†uiåæ ‡ä¸­çš„backgroundæ˜ å°„åˆ°å±å¹•ä¸­çš„å®é™…åæ ‡
         Vector2 radius = (BgRect.sizeDelta - HandleRect.sizeDelta) / 2;
-        input = (eventData.position - position) / (radius * mCanvas.scaleFactor);//½«ÆÁÄ»ÖĞµÄ´¥µãºÍbackgroundµÄ¾àÀëÓ³Éäµ½ui¿Õ¼äÏÂÊµ¼ÊµÄ¾àÀë
+        input = (eventData.position - position) / (radius * mCanvas.scaleFactor);//å°†å±å¹•ä¸­çš„è§¦ç‚¹å’Œbackgroundçš„è·ç¦»æ˜ å°„åˆ°uiç©ºé—´ä¸‹å®é™…çš„è·ç¦»
 
-        HandleInput(input.magnitude, input.normalized, radius);        //¶ÔÊäÈë½øĞĞÏŞÖÆ
+        HandleInput(input.magnitude, input.normalized, radius);        //å¯¹è¾“å…¥è¿›è¡Œé™åˆ¶
         HandleRect.anchoredPosition = input * radius;
 
         JoystickOnMove?.Invoke(input, eventData.position - position);
@@ -132,16 +132,16 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         IsTouchJoystickCount--;
         if (IsTouchJoystickCount < 0)
         {
-            // Èİ´í°É£¬±ğ¼õ³É¸ºµÄ
+            // å®¹é”™å§ï¼Œåˆ«å‡æˆè´Ÿçš„
             IsTouchJoystickCount = 0;
         }
-        Vector2 position = Camera.main.WorldToScreenPoint(BgRect.position);//½«ui×ø±êÖĞµÄbackgroundÓ³Éäµ½ÆÁÄ»ÖĞµÄÊµ¼Ê×ø±ê
+        Vector2 position = Camera.main.WorldToScreenPoint(BgRect.position);//å°†uiåæ ‡ä¸­çš„backgroundæ˜ å°„åˆ°å±å¹•ä¸­çš„å®é™…åæ ‡
         RunTouchUp(eventData.position - position);
     }
 
     private void RunTouchUp(Vector2 vPos)
     {
-        // ¼ÆÊı²»¹é0£¬Ôò±íÊ¾»¹ÓĞÊÖÖ¸ÔÚ²Ù×÷£¬²»Ö´ĞĞÒ¡¸Ë½áÊø
+        // è®¡æ•°ä¸å½’0ï¼Œåˆ™è¡¨ç¤ºè¿˜æœ‰æ‰‹æŒ‡åœ¨æ“ä½œï¼Œä¸æ‰§è¡Œæ‘‡æ†ç»“æŸ
         if (IsTouchJoystickCount > 0)
         {
             return;
@@ -200,7 +200,7 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
             IsTouchJoystickCount--;
             if (IsTouchJoystickCount < 0)
             {
-                // Èİ´í°É£¬±ğ¼õ³É¸ºµÄ
+                // å®¹é”™å§ï¼Œåˆ«å‡æˆè´Ÿçš„
                 IsTouchJoystickCount = 0;
                 return;
             }
@@ -212,7 +212,7 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
             
             if(vTouchCount >= IsTouchJoystickCount)  return;
             
-            // µ±Ç°µÄÊÖÖ¸ÊıÁ¿Ğ¡ÓÚ°´ÏÂµÄÊıÁ¿µÄÊ±ºò
+            // å½“å‰çš„æ‰‹æŒ‡æ•°é‡å°äºæŒ‰ä¸‹çš„æ•°é‡çš„æ—¶å€™
             IsTouchJoystickCount = vTouchCount;
             RunTouchUp(Vector2.zero);
 #endif
