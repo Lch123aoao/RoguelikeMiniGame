@@ -201,7 +201,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10000, y: 1222.7361}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -748,7 +748,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1003100572}
-  - component: {fileID: 1003100573}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -773,25 +772,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1003100573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003100571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b608afafde564aa71c695f3f57163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 583449254}
-  _terrParent: {fileID: 1003100572}
-  _terrainSize: {x: 50, y: 50}
-  _terrainObjs:
-  - {fileID: 2696219199857109971, guid: c21eafd884bd4714f8b05f3ae35be104, type: 3}
-  - {fileID: 2696219199857109971, guid: cf191887befb67a45b5d8c275f49b693, type: 3}
-  _timer: 1
 --- !u!1 &1284336939
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +850,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10000, y: 10000}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -906,6 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
