@@ -16,6 +16,8 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     [Header("摇杆类型")]
     public EJoystickType EJoystickType = EJoystickType.Fixed;
 
+    public Camera uiCamera;
+
     [Header("摇杆背景")]
     public RectTransform BgRect;
 
@@ -117,7 +119,7 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
             }
         }
 
-        Vector2 position = Camera.main.WorldToScreenPoint(BgRect.position);//将ui坐标中的background映射到屏幕中的实际坐标
+        Vector2 position = uiCamera.WorldToScreenPoint(BgRect.position);//将ui坐标中的background映射到屏幕中的实际坐标
         Vector2 radius = (BgRect.sizeDelta - HandleRect.sizeDelta) / 2;
         input = (eventData.position - position) / (radius * mCanvas.scaleFactor);//将屏幕中的触点和background的距离映射到ui空间下实际的距离
 
@@ -135,7 +137,7 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
             // 容错吧，别减成负的
             IsTouchJoystickCount = 0;
         }
-        Vector2 position = Camera.main.WorldToScreenPoint(BgRect.position);//将ui坐标中的background映射到屏幕中的实际坐标
+        Vector2 position = uiCamera.WorldToScreenPoint(BgRect.position);//将ui坐标中的background映射到屏幕中的实际坐标
         RunTouchUp(eventData.position - position);
     }
 
@@ -187,7 +189,7 @@ public class MyJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     private Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)
     {
         Vector2 localPoint = Vector2.zero;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(mBaseRect, screenPosition, Camera.main, out localPoint);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(mBaseRect, screenPosition, uiCamera, out localPoint);
         return localPoint;
     }
 
