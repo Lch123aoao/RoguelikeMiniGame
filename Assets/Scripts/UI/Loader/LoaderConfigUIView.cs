@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using GameFramework;
+using GameFramework.UI;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using UnityGameFramework.Runtime;
+using Slider = UnityEngine.UI.Slider;
 
 namespace MyGameFramework
 {
-    public class Login : UIFormLogic
+    public class LoaderConfigUIView : UIFormLogic
     {
-        public Button LoginBtn;
-
+        public Slider _configSlider;
+        public Text _configtext;
+        
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            LoginBtn.onClick.AddListener(OnClickLoginBtn);
         }
 
         protected override void OnOpen(object userData)
@@ -24,16 +27,7 @@ namespace MyGameFramework
 
         protected override void OnClose(bool isShutdown, object userData)
         {
-            LoginBtn.onClick.RemoveListener(OnClickLoginBtn);
             base.OnClose(isShutdown, userData);
-        }
-
-        /// <summary>
-        /// 点击登录按钮
-        /// </summary>
-        public void OnClickLoginBtn()
-        {
-            GameDataManager.GetDataManager<LoaderDataManager>().isLoginBtn = true;
         }
     }
 }
