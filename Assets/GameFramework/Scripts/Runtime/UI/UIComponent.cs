@@ -223,18 +223,32 @@ namespace UnityGameFramework.Runtime
             Transform transform = uiFormHelper.transform;
             transform.SetParent(this.transform);
             transform.localScale = Vector3.one;
-
+            
             m_UIManager.SetUIFormHelper(uiFormHelper);
 
-            if (m_InstanceRoot == null)
-            {
-                m_InstanceRoot = new GameObject("UI Form Instances").transform;
-                m_InstanceRoot.SetParent(gameObject.transform);
-                m_InstanceRoot.localScale = Vector3.one;
-            }
+            // if (m_InstanceRoot == null)
+            // {
+            //     m_InstanceRoot = new GameObject("UI Form Instances").transform;
+            //     m_InstanceRoot.SetParent(gameObject.transform);
+            //     m_InstanceRoot.localScale = Vector3.one;
+            // }
+            //
+            // m_InstanceRoot.gameObject.layer = LayerMask.NameToLayer("UI");
+            //
+            // for (int i = 0; i < m_UIGroups.Length; i++)
+            // {
+            //     if (!AddUIGroup(m_UIGroups[i].Name, m_UIGroups[i].Depth))
+            //     {
+            //         Log.Warning("Add UI group '{0}' failure.", m_UIGroups[i].Name);
+            //         continue;
+            //     }
+            // }
+        }
 
+        public void SetInstanceRoot(Transform Root)
+        {
+            m_InstanceRoot = Root;
             m_InstanceRoot.gameObject.layer = LayerMask.NameToLayer("UI");
-
             for (int i = 0; i < m_UIGroups.Length; i++)
             {
                 if (!AddUIGroup(m_UIGroups[i].Name, m_UIGroups[i].Depth))
