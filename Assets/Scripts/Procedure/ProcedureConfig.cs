@@ -40,7 +40,7 @@ namespace MyGameFramework
             //注册加载失败回调
             MainGame.Event.Subscribe(LoadDataTableFailureEventArgs.EventId, OnLoaderDataTableFailure);
             
-            curForm = MainGame.UI.OpenUIForm("Assets/Resources/Prefabs/UI/Loader/LoaderConfigUIView.prefab", "Loader");
+            curForm = MainGame.GameUI.OpenUI(Const.LoaderConfigUIView, EnumType.UIGroupEnum.Main,false);
             for (int i = 0; i < ConfigNameList.Count; i++)
             {
                 InitConfigData(ConfigNameList[i]);
@@ -75,7 +75,7 @@ namespace MyGameFramework
             mIsLoaderFinish = false;
             
             //流程结束 关闭资源加载界面
-            MainGame.UI.CloseUIForm(curForm);
+            MainGame.GameUI.CloseUI(curForm);
         }
 
         protected override void OnDestroy(IFsm<IProcedureManager> procedureOwner)

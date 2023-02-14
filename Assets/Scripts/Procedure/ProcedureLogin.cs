@@ -20,8 +20,9 @@ namespace MyGameFramework
 
         protected override void OnEnter(IFsm<IProcedureManager> procedureOwner)
         {
-            base.OnEnter(procedureOwner);
-            curForm = MainGame.UI.OpenUIForm("Assets/Resources/Prefabs/UI/Login/LoginUIView.prefab", "Loader");
+            base.OnEnter(procedureOwner);;
+            curForm = MainGame.GameUI.OpenUI(Const.LoginUIView, EnumType.UIGroupEnum.Main,false );
+
         }
 
 

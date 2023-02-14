@@ -8,12 +8,13 @@ public partial class MainGame : MonoBehaviour
     private static MainGame Instance;
     private static GameObject MainGameRoot;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Debug.LogError("游戏启动");
         Instance = this;
         
         InitBuiltinComponents();
+        InitCustomComponents();
         
         if (MainGameRoot == null)
         {
