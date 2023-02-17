@@ -34,7 +34,7 @@ namespace MyGameFramework
             {
                 GameDataManager.GetDataManager<LoaderDataManager>().isLoginBtn = false;
                 //进入游戏流程
-                ChangeState<ProcedureMainGame>(procedureOwner);
+                ChangeState<ProcedureScene>(procedureOwner);
             }
         }
 

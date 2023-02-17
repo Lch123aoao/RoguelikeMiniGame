@@ -8,6 +8,11 @@ namespace MyGameFramework
     {
         public const string UIRoot_Path = "Assets/Resources/Prefabs/UI/Root/UIRoot.prefab";
         
+        /// <summary>
+        /// 玩家
+        /// </summary>
+        public const string PlayerPath = "Assets/Resources/Prefabs/Model/Player/Player.prefab";
+        
         //UI路径
         public const string UI_Path = "Assets/Resources/Prefabs/UI/";
     }

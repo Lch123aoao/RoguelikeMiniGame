@@ -6,14 +6,16 @@ using GameFramework.Procedure;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
+
 namespace MyGameFramework
 {
     /// <summary>
-    /// 主游戏运行流程
+    /// 切换场景流程
     /// </summary>
-    public class ProcedureMainGame : ProcedureBase
+    public class ProcedureScene : ProcedureBase
     {
-        private SceneBase mSceneBase;
+        private bool isScene = false;
+        
         protected override void OnInit(IFsm<IProcedureManager> procedureOwner)
         {
             base.OnInit(procedureOwner);
@@ -22,22 +24,35 @@ namespace MyGameFramework
         protected override void OnEnter(IFsm<IProcedureManager> procedureOwner)
         {
             base.OnEnter(procedureOwner);
-            mSceneBase = GameObject.Find("SceneBase").GetComponent<SceneBase>();
-            if(mSceneBase == null) return;
-            mSceneBase.OnStart();
+            //进行场景切换
+            MainGame.Event.Subscribe(LoadSceneSuccessEventArgs.EventId,LoadSceneSuccess);
+            //开始加载场景
+            isScene = false;
+            //进入场景
+            MainGame.Scene.LoadScene("Assets/Resources/Scenes/1001.unity", 0);
+        }
+
+        private void LoadSceneSuccess(object sender, GameEventArgs e)
+        {
+            //场景加载完毕
+            isScene = true;
         }
 
         protected override void OnUpdate(IFsm<IProcedureManager> procedureOwner, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
-            mSceneBase.OnUpdate();
+            if (isScene)
+            {
+                ChangeState<ProcedureMainGame>(procedureOwner);
+                isScene = false;
+            }
         }
 
         protected override void OnLeave(IFsm<IProcedureManager> procedureOwner, bool isShutdown)
         {
             base.OnLeave(procedureOwner, isShutdown);
-            //关闭 相当于移除
-            mSceneBase.OnDestroy();
+            MainGame.Event.Unsubscribe(LoadSceneSuccessEventArgs.EventId,LoadSceneSuccess);
+            isScene = false;
         }
     }
 }
