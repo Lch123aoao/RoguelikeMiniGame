@@ -9,5 +9,10 @@ namespace MyGameFramework
         public const string LoaderConfigUIView = "Loader/LoaderConfigUIView";
 
         public const string LoginUIView = "Login/LoginUIView";
+        
+        /// <summary>
+        /// 摇杆
+        /// </summary>
+        public const string JoystickUIPanel = "Joystick/JoystickUIPanel";
     }
 }

@@ -18,6 +18,11 @@ namespace UnityGameFramework.Runtime
             UICamera = vCamera;
         }
         
+        public Camera GetUICamera()
+        {
+            return UICamera;
+        }
+        
         public void SetUIComponent(UIComponent vUIComponent)
         {
             _uiComponent = vUIComponent;

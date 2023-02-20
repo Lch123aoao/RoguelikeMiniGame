@@ -28,6 +28,8 @@ namespace MyGameFramework
             InitPlayerAoi();
             //创建摄像机
             //创建摇杆
+            MainGame.GameUI.OpenUI(Const.JoystickUIPanel, EnumType.UIGroupEnum.Battle,false);
+            
         }
         
         
