@@ -15,5 +15,7 @@ namespace MyGameFramework
         
         //UI路径
         public const string UI_Path = "Assets/Resources/Prefabs/UI/";
+        
+        public const string ScenePath = "Assets/Scenes/1001.unity";
     }
 }
