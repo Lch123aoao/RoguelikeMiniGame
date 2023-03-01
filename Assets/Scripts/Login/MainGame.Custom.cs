@@ -17,9 +17,36 @@ public partial class MainGame
         get;
         private set;
     }
-    
+
+    /// <summary>
+    /// 获取地图控制器组件
+    /// </summary>
+    public static MapComponent MapComponent
+    {
+        get;
+        private set;
+    }
+
+    /// <summary>
+    /// 获取怪物
+    /// </summary>
+    public static MonsterSpawnComponent MonsterSpawnComponent
+    {
+        get;
+        private set;
+    }
+
+    public static SkillComponent SkillComponent
+    {
+        get;
+        private set;
+    }
+
     public void InitCustomComponents()
     {
         GameUI = GetGameFrameworkComponent<GameUIComponent>();
+        MapComponent = GetGameFrameworkComponent<MapComponent>();
+        MonsterSpawnComponent = GetGameFrameworkComponent<MonsterSpawnComponent>();
+        SkillComponent = GetGameFrameworkComponent<SkillComponent>();
     }
 }

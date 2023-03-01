@@ -29,7 +29,7 @@ namespace MyGameFramework
             //开始加载场景
             isScene = false;
             //进入场景
-            MainGame.Scene.LoadScene("Assets/Resources/Scenes/1001.unity", 0);
+            MainGame.Scene.LoadScene("Assets/Scenes/1001.unity", 0);
         }
 
         private void LoadSceneSuccess(object sender, GameEventArgs e)

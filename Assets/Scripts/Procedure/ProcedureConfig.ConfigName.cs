@@ -11,7 +11,11 @@ namespace MyGameFramework
         /// </summary>
         private List<string> ConfigNameList = new List<string>()
         {
-            "Access"
+            "Access",
+            "Entity",
+            "UnitData",
+            "SkillData",
+            "SkillTemplate"
         };
 
     }

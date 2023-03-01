@@ -34,9 +34,9 @@ namespace UnityGameFramework.Runtime
           
         }
 
-        protected override void Start()
+        protected void Start()
         {
-            base.Start();
+            // base.Start();
             //注册加载成功回调
             MainGame.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OpenUIFormSuccess);
             //注册加载失败回调
