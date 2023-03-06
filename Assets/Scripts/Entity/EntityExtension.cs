@@ -18,6 +18,15 @@ public static class EntityExtension
         return --s_SerialId;
     }
 
+    /// <summary>
+    /// 标志id，唯一标志
+    /// </summary>
+    private static int m_signId = 0;
+    public static int GenerateSignId(this EntityComponent entityComponent)
+    {
+        return m_signId++;
+    }
+
     public static Entity GetGameEntity(this EntityComponent entityComponent, int entityId)
     {
         UnityGameFramework.Runtime.Entity entity = entityComponent.GetEntity(entityId);
@@ -62,7 +71,6 @@ public static class EntityExtension
             Log.Warning("Data is invalid.");
             return;
         }
-
         IDataTable<DREntity> dtEntity = MainGame.DataTable.GetDataTable<DREntity>();
         DREntity drEntity = dtEntity.GetDataRow(data.EntityId);
         if (drEntity == null)
@@ -70,7 +78,6 @@ public static class EntityExtension
             Log.Warning("Can not load entity id '{0}' from data table.", data.EntityId.ToString());
             return;
         }
-
         entityComponent.ShowEntity(data.Id, logicType, AssetUtility.GetEntityAsset(drEntity.AssetName), entityGroup, priority, data);
     }
 }

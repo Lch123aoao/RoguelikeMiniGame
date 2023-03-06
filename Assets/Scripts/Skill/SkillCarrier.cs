@@ -14,7 +14,7 @@ public class SkillCarrier : Entity
     //技能数据
     private SkillData skillData;
     public SkillData _skillData { get { return skillData; } }
-    //技能模板
+    //技能模板  这个模板从引用池里拿取，现在是创建用完就丢掉
     private SkillTemplateBase skillTemplate;
 
     private float duration;
@@ -23,19 +23,24 @@ public class SkillCarrier : Entity
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
+    }
+
+    protected override void OnShow(object userData)
+    {
+        base.OnShow(userData);
         skillData = userData as SkillData;
         if (skillData == null)
         {
             Log.Error("Bullet data is invalid.");
             return;
         }
-        curAttackCount = 0;
-        InitSkill();
-    }
 
-    protected override void OnShow(object userData)
-    {
-        base.OnShow(userData);
+        Log.Info("创建一个技能,skillId: " + skillData.SkillId);
+        transform.position = skillData.deployer.position;
+        transform.eulerAngles = skillData.deployer.eulerAngles;
+        curAttackCount = 0;
+        duration = 0;
+        InitSkill();
     }
     protected override void OnHide(bool isShutdown, object userData)
     {
@@ -51,6 +56,8 @@ public class SkillCarrier : Entity
     {
         base.OnUpdate(elapseSeconds, realElapseSeconds);
         if (skillData == null)
+            return;
+        if (!isActive)
             return;
         if (skillTemplate != null)
         {
@@ -70,7 +77,7 @@ public class SkillCarrier : Entity
         //生成一个技能模板
         skillTemplate = MainGame.SkillComponent.CreateSkillTemplateBaseById(skillData.SkillTemplateId);
         if (skillTemplate == null) return;
-        skillTemplate.OnInit(this, skillData);
+        skillTemplate.OnShow(skillData.deployer, transform, skillData);
     }
 
     // 攻击到敌人

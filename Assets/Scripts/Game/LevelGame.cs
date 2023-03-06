@@ -12,7 +12,7 @@ public class LevelGame : GameBase
         //显示玩家
         MainGame.Entity.ShowPlayer(new AoiUnitData(MainGame.Entity.GenerateSerialId(), 10000, EnumType.CampType.Player)
         {
-            Position = new Vector3(0, 0, -1),
+            Position = new Vector3(0, 0, 0),
         });
     }
 

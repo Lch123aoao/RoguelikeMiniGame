@@ -22,6 +22,8 @@ public abstract class Entity : EntityLogic
         }
     }
 
+    protected bool isActive;
+
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
@@ -35,7 +37,7 @@ public abstract class Entity : EntityLogic
     protected override void OnShow(object userData)
     {
         base.OnShow(userData);
-
+        isActive = true;
         m_EntityData = userData as EntityData;
         if (m_EntityData == null)
         {
@@ -44,7 +46,6 @@ public abstract class Entity : EntityLogic
         }
 
         Name = Utility.Text.Format("[Entity {0}]", Id);
-        Debug.LogError("position"+m_EntityData.Position);
         CachedTransform.localPosition = m_EntityData.Position;
         CachedTransform.localScale = Vector3.one;
     }
@@ -52,6 +53,7 @@ public abstract class Entity : EntityLogic
     protected override void OnHide(bool isShutdown, object userData)
     {
         base.OnHide(isShutdown, userData);
+        isActive = false;
     }
 
     protected override void OnAttached(EntityLogic childEntity, Transform parentTransform, object userData)

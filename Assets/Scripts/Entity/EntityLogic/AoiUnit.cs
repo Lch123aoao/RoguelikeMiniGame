@@ -67,6 +67,7 @@ public class AoiUnit : Entity
         if (skillDeployer != null)
         {
             skillDeployer.OnDispose();
+            skillDeployer = null;
         }
     }
 
@@ -95,7 +96,7 @@ public class AoiUnit : Entity
     //初始化技能
     private void Init_Skill()
     {
-        // skillDeployer = MainGame.SkillComponent.CreateSkillDeployer();
-        // skillDeployer.OnInit(this, unitData.SkillList);
+        skillDeployer = MainGame.SkillComponent.CreateSkillDeployer();
+        skillDeployer.OnInit(this, unitData.SkillList);
     }
 }

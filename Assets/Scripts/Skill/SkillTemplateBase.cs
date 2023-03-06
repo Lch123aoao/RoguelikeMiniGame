@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface SkillTemplateBase
 {
-    void OnInit(SkillCarrier carrier, SkillData data);
+    void OnShow(Transform unit, Transform carrier, SkillData data);
     void OnUpdate(float elapseSeconds, float realElapseSeconds);
     void OnDisable();
 }

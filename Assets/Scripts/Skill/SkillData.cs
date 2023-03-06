@@ -8,7 +8,7 @@ using UnityGameFramework.Runtime;
 //技能数据
 public class SkillData : EntityData
 {
-    public SkillData(int entityId, int skillId, EnumType.CampType type)
+    public SkillData(int entityId, int skillId, int signId, EnumType.CampType type)
            : base(entityId, skillId)
     {
         //处理一下技能数据吧
@@ -20,6 +20,7 @@ public class SkillData : EntityData
             return;
         }
         SkillId = skillId;
+        SignId = signId;
         EntityId = data.EntityId;
         SkillTemplateId = data.SkillTemplateId;
         TowardType = data.TowardType;
@@ -29,13 +30,15 @@ public class SkillData : EntityData
         BaseMoveSpeed = data.BaseMoveSpeed;
         UsageCount = data.UsageCount;
         Duration = data.Duration;
-        
+
         campType = type;
     }
 
     // ---------------------- 配置数据常量 ----------------------
     //技能ID
     public int SkillId;
+    //标志id
+    public int SignId;
     //技能模板id
     public int SkillTemplateId;
     //朝向类型
@@ -61,6 +64,8 @@ public class SkillData : EntityData
     public int remainAttackCD;
     //释放此技能的阵营：玩家、怪物。。。
     public EnumType.CampType campType;
+    //释放此技能的单位
+    public Transform deployer;
 
     //技能作用目标tag
     // public string[] attackTargetTags;

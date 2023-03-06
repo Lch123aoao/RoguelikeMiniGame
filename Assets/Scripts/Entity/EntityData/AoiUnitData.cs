@@ -148,20 +148,20 @@ public class AoiUnitData : EntityData
     /// </summary>
     /// <param name="isAdd">是否添加</param>
     /// <param name="skillId">技能id</param>
-    public void ModifySkill(bool isAdd, int skillId, int entityId)
+    public void ModifySkill(bool isAdd, int skillId, int signId)
     {
         if (skillList == null)
             skillList = new List<SkillData>();
         if (isAdd)
         {
-            var vData = new SkillData(MainGame.Entity.GenerateSerialId(), skillId, campType);
+            var vData = new SkillData(0, skillId, MainGame.Entity.GenerateSignId(), campType);
             skillList.Add(vData);
         }
         else
         {
             for (int i = 0; i < skillList.Count; i++)
             {
-                if (skillList[i].SkillId == skillId && skillList[i].Id == entityId)
+                if (skillList[i].SkillId == skillId && skillList[i].SignId == signId)
                 {
                     skillList.RemoveAt(i);
                     return;

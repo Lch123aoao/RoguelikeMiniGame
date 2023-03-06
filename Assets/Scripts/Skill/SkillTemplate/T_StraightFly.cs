@@ -10,31 +10,46 @@ public class T_StraightFly : SkillTemplateBase
 {
     private SkillData skillData;
 
-    private int towardType;
-    private Vector2 startDir;//起始发射方向
-
+    //技能载体
     private Transform _carrier;
+    //单位实体
+    private Transform _unit;
 
     /// <summary>
     /// 初始化
     /// </summary>
     /// <param name="carrier">技能载体</param>
     /// <param name="data">技能数据</param>
-    public void OnInit(SkillCarrier carrier, SkillData data)
+    public void OnShow(Transform unit, Transform carrier, SkillData data)
     {
         _carrier = carrier.transform;
+        _unit = unit;
         skillData = data;
         if (skillData.TowardType == (int)EnumType.TowardType.launcherForward)
         {
-            startDir = carrier.transform.forward;
+            carrier.eulerAngles = unit.eulerAngles;
         }
         else if (skillData.TowardType == (int)EnumType.TowardType.towardNearestEnemy)
         {
+            float z = 0;
             var target = FindNearestEnemy(carrier.transform.position, 10, skillData.campType, 0);
-            if (target == null)
-                startDir = carrier.transform.forward;
+            if (target != null)
+            {
+                var startDir = (target.position - carrier.transform.position).normalized;
+                if (startDir.x > 0)
+                    z = -Vector3.Angle(Vector3.up, startDir);
+                else
+                    z = Vector3.Angle(Vector3.up, startDir);
+                carrier.eulerAngles = new Vector3(0, 0, z);
+            }
             else
-                startDir = (target.position - carrier.transform.position).normalized;
+            {
+                carrier.eulerAngles = unit.eulerAngles;
+            }
+        }
+        else
+        {
+            carrier.eulerAngles = unit.eulerAngles;
         }
     }
 
@@ -43,7 +58,7 @@ public class T_StraightFly : SkillTemplateBase
         if (_carrier == null || skillData == null)
             return;
 
-        _carrier.Translate(startDir * skillData.BaseMoveSpeed * elapseSeconds, Space.World);
+        _carrier.Translate(Vector2.up * skillData.BaseMoveSpeed * elapseSeconds, Space.World);
     }
 
     public void OnDisable()

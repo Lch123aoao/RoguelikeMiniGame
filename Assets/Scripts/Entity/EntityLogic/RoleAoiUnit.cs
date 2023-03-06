@@ -9,7 +9,6 @@ using UnityGameFramework.Runtime;
 /// </summary>
 public class RoleAoiUnit : AoiUnit
 {
-    private List<string> contactMonsterList;
 
     protected override void OnInit(object userData)
     {

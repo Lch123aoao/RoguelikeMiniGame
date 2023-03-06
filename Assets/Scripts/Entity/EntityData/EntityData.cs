@@ -41,6 +41,10 @@ public abstract class EntityData
         {
             return m_Id;
         }
+        set
+        {
+            m_Id = value;
+        }
     }
 
     /// <summary>

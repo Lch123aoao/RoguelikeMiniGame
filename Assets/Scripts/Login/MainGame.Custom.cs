@@ -36,7 +36,21 @@ public partial class MainGame
         private set;
     }
 
+    /// <summary>
+    /// 技能总管理器
+    /// </summary>
+    /// <value></value>
     public static SkillComponent SkillComponent
+    {
+        get;
+        private set;
+    }
+
+    /// <summary>
+    /// 计时器
+    /// </summary>
+    /// <value></value>
+    public static TimerComponent TimerComponent
     {
         get;
         private set;
@@ -48,5 +62,6 @@ public partial class MainGame
         MapComponent = GetGameFrameworkComponent<MapComponent>();
         MonsterSpawnComponent = GetGameFrameworkComponent<MonsterSpawnComponent>();
         SkillComponent = GetGameFrameworkComponent<SkillComponent>();
+        TimerComponent = GetGameFrameworkComponent<TimerComponent>();
     }
 }

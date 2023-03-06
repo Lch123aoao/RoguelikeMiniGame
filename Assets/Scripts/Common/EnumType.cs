@@ -46,8 +46,8 @@ public class EnumType
     //技能朝向类型
     public enum TowardType : byte
     {
-        launcherForward,//发射者正方向
-        towardNearestEnemy,//朝向距离最近的敌人
+        launcherForward = 0,//发射者正方向
+        towardNearestEnemy = 1,//朝向距离最近的敌人
     }
 
 }
